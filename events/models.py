@@ -53,7 +53,7 @@ class Answer(models.Model):
     ho_review = models.BooleanField(default=False)
     ho_reg_affairs_review = models.BooleanField(default=False)
     quality = models.BooleanField(default=False)
-    ho_reg_affairs_comments = models.TextField(null=True,blank=True)
+    #ho_reg_affairs_comments = models.TextField(null=True,blank=True)
 
     def __str__(self):
         if self.name is None:

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from datetime import datetime
-import openpyxl as xl
+import openpyxl
 from .models import Tree, Answer
 from .forms import TreeForm, AnswerForm, AnswerStatusForm
 
@@ -48,7 +48,7 @@ def tree_delete_one(request,tree_id):
     return render(request,'tree_list.html',{'tree_list':tree_list})
 
 def tree_upload(request):
-    wb = xl.load_workbook('Tree.xlsx')
+    wb = openpyxl.load_workbook('Tree.xlsx')
     sheet = wb['Sheet1']
     for row in range(1, sheet.max_row + 1):
         number = sheet.cell(row, 1).value
@@ -272,7 +272,7 @@ def answer_status_update(request, answer_id):
     return render(request,'answer_status_update.html',{'answer':answer,'form':form})
 
 def answer_upload(request):
-    wb = xl.load_workbook('Answer.xlsx')
+    wb = openpyxl.load_workbook('Answer.xlsx')
     sheet = wb['Sheet1']
     for row in range(1, sheet.max_row + 1):
         number = sheet.cell(row, 1).value

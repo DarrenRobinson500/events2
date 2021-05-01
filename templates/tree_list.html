@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% block content %}
+<h1>Questions</h1><br>
+<table class='table table-striped table-hover table-bordered'>
+    <tr  class="table-primary"><th>#</th><th>Question</th><th>Ans1</th><th>Resp1</th><th>Ans2</th><th>Resp2</th><th>Ans3</th><th>Resp3</th>
+        <th>Ans4</th><th>Resp4</th><th>Ans5</th><th>Resp5</th><th>Update</th><th>Delete</th></tr>
+    {% for item in tree_list %}
+    <tr>
+        <td>{{item.number}}</td>
+        <td><a href='{% url 'tree_ind' item.id %}'> {{ item }} </a></td>
+        <td>{{item.answer1}}</td><td>{{item.result1}}</td>
+        <td>{{item.answer2}}</td><td>{{item.result2}}</td>
+        <td>{{item.answer3}}</td><td>{{item.result3}}</td>
+        <td>{{item.answer4}}</td><td>{{item.result4}}</td>
+        <td>{{item.answer5}}</td><td>{{item.result5}}</td>
+        <td><a href='{% url 'tree_update' item.id %}' class='btn btn-outline-secondary btn-sm'> Update </a></td>
+        <td><a href='{% url 'tree_delete_one' item.id %}' class='btn btn-outline-secondary btn-sm'> Delete </a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

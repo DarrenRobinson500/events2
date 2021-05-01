@@ -1,0 +1,96 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<style>.darkred {color:darkred;}</style>
+<style>.red {color:red; }</style>
+<style>.orange {color:orange; }</style>
+<style>.green {color:green;}</style>
+
+<h1>Not Reported</h1><a href='{% url 'answer_send_emails'%}' class='btn btn-outline-secondary btn-sm'>Send Emails</a><br><br>
+<table class='table table-striped table-hover table-bordered'>
+    <tr class="table-primary"><th>Item</th><th>Outcome</th><th>Classified</th><th>Complete Information</th><th>HO Review</th>
+        <th>HO Reg Affairs Review</th><th>Age (days)</th><th>Actions</th></tr>
+    {% for item in events_unreported %}
+    {% if item.colour == "red" %} <tr class="table-danger">
+    {% elif item.colour == "amber" %} <tr class="table-warning">
+    {% else %} <tr> {% endif %}
+        <td><a href='{% url 'answer_ind' item.id %}'> {{ item }} </a></td>
+        <td>{{item.outcome}}</td>
+        <td>
+            {% if item.classified %}<span class = green>Classified</span>
+            {% else %} <span class = red> <b>Not classified</b> </span><br> <a href="{% url 'logic_tree_update' item.id %}">Redo Logic Tree</a>
+            {% endif %}
+        </td>
+        <td>
+            {% if item.information %}<span class = green>Complete</span>
+            {% else %} <span class = red> <b>Incomplete</b> </span> <a href='{% url 'answer_update' item.id %}'>Update Info</a>
+            <br><a href='{% url 'answer_status_update' item.id %}'>Update Status</a>
+            {% endif %}
+        </td>
+        <td>
+            {% if item.ho_review %}<span class = green>Signed off</span>
+            {% else %} <span class = red> <b>Not yet signed off</b> <br></span> <a href='{% url 'answer_status_update' item.id %}'>Update Status</a>
+            {% endif %}
+        </td>
+        <td>
+            {% if item.ho_reg_affairs_review and item.quality %}<span class = green>Signed off</span><br><a href='{% url 'answer_print' item.id %}'>Print</a>
+            {% elif item.ho_reg_affairs_review %}<span class = orange>Reviewed but questions: </span><br>item.ho_reg_affairs_comments<br><a href='{% url 'answer_update' item.id %}'>Update Details</a>
+            {% else %} <span class = orange> <b>Not yet signed off</b> </span> <a href='{% url 'answer_status_update' item.id %}'>Update Status</a>
+            {% endif %}
+        </td>
+
+        <td>{{item.age}}</td>
+        <td style="min-width:110px"><a href='{% url 'answer_print' item.id %}' class='btn btn-outline-success btn-sm'>Print</a><br>
+        <a href='{% url 'answer_update' item.id %}' class='btn btn-outline-secondary btn-sm'>Update Info</a><br>
+        <a href='{% url 'answer_status_update' item.id %}' class='btn btn-outline-secondary btn-sm'>Update Status</a><br>
+        <a href='{% url 'answer_delete_one' item.id %}' class='btn btn-outline-secondary btn-sm'>Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h1>Reported</h1><br>
+<table class='table table-striped table-hover table-bordered'>
+    <tr class="table-primary"><th>Item</th><th>Outcome</th><th>Classified</th><th>Complete Information</th><th>HO Review</th>
+        <th>HO Reg Affairs Review</th><th>Quality Check</th><th>Age (days)</th><th>Reported</th><th>Next step</th><th>Actions</th></tr>
+    {% for item in events_reported %}
+    {% if item.colour == "red" %} <tr class="table-danger">
+    {% elif item.colour == "amber" %} <tr class="table-warning">
+    {% else %} <tr> {% endif %}
+        <td><a href='{% url 'answer_ind' item.id %}'> {{ item }} </a></td>
+        <td>{{item.outcome}}</td>
+        <td>{{item.classified}}</td>
+        <td>{{item.information}}</td>
+        <td>{{item.ho_review}}</td>
+        <td>{{item.ho_reg_affairs_review}}</td>
+        <td>{{item.quality}}</td>
+        <td>{{item.age}}</td>
+        <td>{{item.reported}}</td>
+        <td>{{item.next_step}}</td>
+        <td style="min-width:110px"><a href='{% url 'answer_print' item.id %}' class='btn btn-outline-success btn-sm'>Print</a><br>
+        <a href='{% url 'answer_update' item.id %}' class='btn btn-outline-secondary btn-sm'>Update Info</a><br>
+        <a href='{% url 'answer_status_update' item.id %}' class='btn btn-outline-secondary btn-sm'>Update Status</a><br>
+        <a href='{% url 'answer_delete_one' item.id %}' class='btn btn-outline-secondary btn-sm'>Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h1>Non events</h1><br>
+<table class='table table-striped table-hover table-bordered'>
+    <tr class="table-primary"><th>Item</th><th>Outcome</th><th>Date identified</th><th>Actions</th></tr>
+    {% for item in non_events %}
+    <tr>
+        <td><a href='{% url 'answer_ind' item.id %}'> {{ item }} </a></td>
+        <td>{{item.outcome}}</td>
+        <td>{{item.date_identified}}</td>
+        <td style="min-width:110px">
+        <a href='{% url 'answer_update' item.id %}' class='btn btn-outline-secondary btn-sm'>Update Info</a><br>
+        <a href='{% url 'answer_status_update' item.id %}' class='btn btn-outline-secondary btn-sm'>Update Status</a><br>
+        <a href='{% url 'answer_delete_one' item.id %}' class='btn btn-outline-secondary btn-sm'>Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+
+{% endblock %}

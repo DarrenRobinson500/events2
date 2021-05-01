@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+{% block content %}
+<h1>Answer Upload</h1><br>
+<table class='table table-striped table-hover table-bordered'>
+    {% for item in answer_list %}
+    <tr>
+        <td>{{answer.number}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

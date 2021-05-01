@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block content %}
+Event Details
+<h1>{{answer.name}}</h1><br>
+<p>Outcome: {{answer.outcome}}</p>
+<br><br>
+    <form action='' method = POST>
+        {% csrf_token %}
+        {{form.as_p}} <br>
+        <input type = 'submit' value = 'Update' class='btn btn-secondary'>
+    </form>
+<br>
+<a href="{% url 'answer_list' %}">List</a>
+{% endblock %}

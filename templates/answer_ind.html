@@ -1,0 +1,57 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<a href="{% url 'answer_list' %}">Back to list</a><br><br>
+<div class='card'>
+    <div class='card-header'>
+        Logic Tree results
+    </div>
+    <div class='card-body'>
+        <h5 class='card-title'>{{answer}}</h5>
+        <p class='card-text'>
+            <ul>
+                {% if answer.q1 is not None %} <li> Q1: {{ answer.q1}}  </li> {% endif %}
+                {% if answer.q2 is not None %} <li> Q2: {{ answer.q2}}  </li> {% endif %}
+                {% if answer.q3 is not None %} <li> Q3: {{ answer.q3}}  </li> {% endif %}
+                {% if answer.q4 is not None %} <li> Q4: {{ answer.q4}}  </li> {% endif %}
+                {% if answer.q5 is not None %} <li> Q5: {{ answer.q5}}  </li> {% endif %}
+                {% if answer.q6 is not None %} <li> Q6: {{ answer.q6}}  </li> {% endif %}
+                {% if answer.q7 is not None %} <li> Q7: {{ answer.q7}}  </li> {% endif %}
+                {% if answer.q8 is not None %} <li> Q8: {{ answer.q8}}  </li> {% endif %}
+                {% if answer.q9 is not None %} <li> Q9: {{ answer.q9}}  </li> {% endif %}
+                {% if answer.q10 is not None %} <li> Q10: {{ answer.q10}}  </li> {% endif %}
+                <li><b> Outcome: {{ answer.outcome}}  </b></li>
+            </ul>
+            <a href="{% url 'logic_tree_update' answer.id %}">Redo Logic Tree</a><br>
+        </p>
+    </div>
+</div>
+<br>
+<div class='card'>
+    <div class='card-header'>
+        Proposed ASIC Response
+    </div>
+    <div class='card-body'>
+        <h5 class='card-title'>{{answer}}</h5>
+        <p class='card-text'>
+            <ul>
+                <li> Date arose: {{ answer.date_arose}}  </li>
+                <li> Date identified: {{ answer.date_identified}}  </li>
+                <li> Nature: {{ answer.nature}}  </li>
+                <li> Description: {{ answer.description}}  </li>
+                <li> Why reportable: {{ answer.why_reportable}}  </li>
+                <li> How identified: {{ answer.how_identified}}  </li>
+                <li> Duration: {{ answer.duration}}  </li>
+                <li> Representative details: {{ answer.representative_details}}  </li>
+                <li> How rectified: {{ answer.how_rectified}}  </li>
+                <li> Remediation: {{ answer.remediation}}  </li>
+                <li> Future compliance: {{ answer.future_compliance}}  </li>
+            </ul>
+            <a href="{% url 'answer_update' answer.id %}">Edit Proposed ASIC Response</a><br>
+        </p>
+    </div>
+</div>
+
+<br><br>
+<hr>
+{% endblock %}

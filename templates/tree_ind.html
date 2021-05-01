@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class='card'>
+<div class='card-header'>
+    Tree
+</div>
+  <div class='card-body'>
+    <h5 class='card-title'>{{tree}}</h5>
+    <p class='card-text'>
+    <ul>
+        <li> Number: {{ tree.number}}  </li>
+        <li> Notes: {{ tree.notes}}  </li>
+        <li> Question: {{ tree.question}}  </li>
+        <li> Answer1: {{ tree.answer1}}  </li>
+        <li> Answer2: {{ tree.answer2}}  </li>
+        <li> Answer3: {{ tree.answer3}}  </li>
+        <li> Answer4: {{ tree.answer4}}  </li>
+        <li> Answer5: {{ tree.answer5}}  </li>
+        <li> Result1: {{ tree.result1}}  </li>
+        <li> Result2: {{ tree.result2}}  </li>
+        <li> Result3: {{ tree.result3}}  </li>
+        <li> Result4: {{ tree.result4}}  </li>
+        <li> Result5: {{ tree.result5}}  </li>
+      </ul>
+    </p>
+  </div>
+</div><br>
+<a href="{% url 'tree_list' %}">List</a><hr>
+{% endblock %}

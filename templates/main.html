@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<form class="mt-5" id="car-form">
+    {% csrf_token %}
+    <div class="ui selection dropdown" id="cars">
+      <input type="hidden" name="car">
+      <i class="dropdown icon"></i>
+      <div class="default text">Choose a car</div>
+      <div class="menu">
+        <div class="item" data-value="0">Female</div>
+      </div>
+    </div>
+
+
+</form>
+
+{% endblock %}

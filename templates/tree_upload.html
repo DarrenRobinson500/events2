@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% block content %}
+<h1>Tree Upload</h1><br>
+<table class='table table-striped table-hover table-bordered'>
+    <tr>
+        <th>Question</th><th>Answer 1</th><th>Answer 2</th><th>Answer 3</th><th>Answer 4</th><th>Answer 5</th>
+    </tr>
+    {% for tree in tree_list %}
+    <tr>
+        <td>{{tree.question}}:</td> <td>{{tree.answer1}}</td><td>{{tree.answer2}}</td>
+        <td>{{tree.answer3}}</td><td>{{tree.answer4}}</td><td>{{tree.answer5}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

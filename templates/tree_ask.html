@@ -1,0 +1,61 @@
+{% extends 'base.html'%}
+{% block content %}
+<head>
+<script>
+    var answer
+    function report(){
+        answer = document.querySelector('input[name=answer]:checked').value;
+        answer_id = document.getElementById("answer_id").value = {{answer_id}}
+        document.getElementById("question_no").value = {{question_no}}
+    }
+</script>
+</head>
+
+<body>
+     <form action='/tree_ask' method="POST">
+        {% csrf_token %}
+
+        {% if name == "" or name is None %}
+        <div class="mb-3">
+          <label for="name" class="form-label">Brief description</label>
+          <input type="text" class="form-control" id="name" name="name" aria-describedby="note">
+          <div id="note" class="form-text">Provide a one or two sentence description of what happened.</div>
+        </div>
+        {% else %}
+         <p name="name">Description: {{name}}</p>
+        {% endif %}
+
+        <h3>{{question}}</h3>
+        {% for answer in answers %}
+            {% if forloop.counter == 1 %}
+                <input type="radio" id="ans1" name="answer" value="ans1" onclick = "report()">
+                <label for="ans1" >{{answer}}</label><br>
+            {% endif %}
+            {% if forloop.counter == 2 %}
+                <input type="radio" id="ans2" name="answer" value="ans2" onclick = "report()">
+                <label for="ans1" >{{answer}}</label><br>
+            {% endif %}
+            {% if forloop.counter == 3 %}
+                <input type="radio" id="ans3" name="answer" value="ans3" onclick = "report()">
+                <label for="ans1" >{{answer}}</label><br>
+            {% endif %}
+            {% if forloop.counter == 4 %}
+                <input type="radio" id="ans4" name="answer" value="ans4" onclick = "report()">
+                <label for="ans1" >{{answer}}</label><br>
+            {% endif %}
+            {% if forloop.counter == 5 %}
+                <input type="radio" id="ans5" name="answer" value="ans5" onclick = "report()">
+                <label for="ans1" >{{answer}}</label><br>
+            {% endif %}
+        {% endfor %}<br>
+
+        <input type = 'submit' value = 'Next question' class='btn btn-secondary'></br/></br/></br/></br/>
+        answer_id:   <input id="answer_id" type="" name="answer_id"></br/>
+        question_no: <input id="question_no" type="" name="question_no"></br/>
+
+<a class='dropdown-item' href="{% url 'tree_ask' %}">New Query</a>
+
+    </form>
+    <br/></br/>
+</body>
+{% endblock %}

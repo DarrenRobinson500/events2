@@ -1,0 +1,1 @@
+web: gunicorn events2.wsgi
